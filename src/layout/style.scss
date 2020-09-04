@@ -1,6 +1,13 @@
 
 .levi-layout {
     height: 100vh;
+    .ant-menu {
+        overflow: 'auto';
+        width: '200px';
+        height: 'calc(100vh - 56px)';
+        position: 'fixed';
+        left: 0;
+    }
     &-logo {
         height: 56px;
         cursor: pointer;
@@ -15,14 +22,21 @@
             object-fit: contain;
         }
     }
+    .site-layout {
+        .site-layout-background {
+            background: #fff;
+        }
+        .ant-layout-header {
+            display: flex;
+            align-items: center;
+            .ant-breadcrumb {
+                margin-left: 20px;
+            }
+            .trigger {
+                margin: 0 16px;
+                font-size: 20px;
+            }
+        }
+    }
 }
 
-.site-layout  {
-    .site-layout-background {
-        background: #fff;
-    }
-    .trigger {
-        margin-left: 16px;
-        font-size: 20px;
-    }
-}
