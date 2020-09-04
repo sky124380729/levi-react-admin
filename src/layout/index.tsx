@@ -14,7 +14,18 @@ const Layout: FC = () => {
                 <div className='levi-layout-logo'>
                     <img src={logo} alt='' />
                 </div>
-                <Menu theme='dark' mode='inline' defaultSelectedKeys={['1']}>
+                <Menu
+                    style={{
+                        width: '200px',
+                        overflow: 'auto',
+                        height: 'calc(100vh - 56px)',
+                        position: 'fixed',
+                        left: 0
+                    }}
+                    theme='dark'
+                    mode='inline'
+                    defaultSelectedKeys={['1']}
+                >
                     <Menu.Item key='1'>nav 1</Menu.Item>
                     <Menu.SubMenu key='2' title='nav 2'>
                         <Menu.Item key='2-1'>nav 2-1</Menu.Item>
