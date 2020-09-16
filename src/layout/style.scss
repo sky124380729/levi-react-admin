@@ -1,38 +1,42 @@
-
 .levi-layout {
-    height: 100vh;
-    .ant-menu {
-        overflow: 'auto';
-        width: '200px';
-        height: 'calc(100vh - 56px)';
-        position: 'fixed';
-        left: 0;
-    }
-    &-logo {
-        height: 56px;
-        cursor: pointer;
-        display: flex;
-        justify-content: center;
-        background-color: #000;
-        align-items: center;
-        transition: none;
-        img {
-            width: 80%;
-            height: 32px;
-            object-fit: contain;
+    .levi-aside {
+        &__logo {
+            height: 56px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            background-color: #000;
+            align-items: center;
+            transition: none;
+            img {
+                width: 80%;
+                height: 32px;
+                object-fit: contain;
+            }
+        }
+        &__menu {
+            overflow: auto;
+            height: calc(100vh - 56px);
+            .ant-menu-item,.ant-menu-submenu-title {
+                height: 48px !important;
+                line-height: 48px !important;
+            }
         }
     }
-    .site-layout {
-        .site-layout-background {
+    .levi-section {
+        &__header {
             background: #fff;
+        }   
+        &__content {
+            background: #fff;
+            margin: 16px;
+            padding: 16px;
+            min-height: 280px;
         }
         .ant-layout-header {
             height: 56px;
             display: flex;
             align-items: center;
-            .ant-breadcrumb {
-                margin-left: 20px;
-            }
             .trigger {
                 margin: 0 16px;
                 font-size: 20px;
@@ -40,4 +44,3 @@
         }
     }
 }
-
