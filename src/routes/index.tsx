@@ -4,10 +4,13 @@ import Settings from '../views/Settings'
 
 const User = (): JSX.Element => <div>User</div>
 const Role = (): JSX.Element => <div>Role</div>
+const Test = (): JSX.Element => <div>Test</div>
 
 export interface IRoute {
     /** 路径 */
     path: string
+    /** 重定向 */
+    redirect?: string
     /** 标题 */
     title: string
     /** 图标 */
@@ -19,7 +22,8 @@ export interface IRoute {
 }
 
 const routes: IRoute[] = [
-    { path: '/platform', title: '中央控制台', icon: 'rocket', component: Platform },
+    { path: '/platform', title: '中央控制台', icon: 'rocket', component: Platform, redirect: '/platform/index' },
+    { path: '/test', title: '测试', icon: 'rocket', component: Test, redirect: '/platform/index' },
     {
         path: '/settings',
         title: '系统设置',
