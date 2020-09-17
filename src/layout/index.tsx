@@ -11,7 +11,7 @@ const Welcome = (): JSX.Element => {
 }
 
 const generateMenus = (routes: IRoute[], fullPath = '') => {
-    return routes.map((route: IRoute, index: number) => {
+    return routes.map((route: IRoute) => {
         const { id, title, path, children, icon } = route
         const uri = '/app' + (fullPath + '/' + path).slice(1)
         if (children && children.length) {
@@ -33,9 +33,10 @@ const generateMenus = (routes: IRoute[], fullPath = '') => {
         }
     })
 }
+
 const generateRoutes = (routes: IRoute[]) => {
     const createRoute = (routes: IRoute[], fullPath = ''): any => {
-        return routes.map((route, index) => {
+        return routes.map((route: IRoute) => {
             const { id, path, children, component } = route
             const uri = '/app' + (fullPath + '/' + path).slice(1)
             if (children && children.length) {
@@ -75,7 +76,7 @@ const generateBreadcrumb = (location: Location, routes: IRoute[]): JSX.Element[]
 }
 
 // 获取当前菜单路由对应的id
-const getRouteId = (location: Location, routes: IRoute[]): string[] => {
+const getRouteKeys = (location: Location, routes: IRoute[]): string[] => {
     const ids: string[] = []
     const names = location.pathname.split('/').slice(1)
     names.reduce((prev: IRoute[], curr: string) => {
@@ -94,7 +95,7 @@ const getRouteId = (location: Location, routes: IRoute[]): string[] => {
 const { Header, Sider, Content } = Wrapper
 
 const Layout: FC = (props: RouteProps) => {
-    const activeKeys = getRouteId(props.location!, routes)
+    const activeKeys = props.location ? getRouteKeys(props.location, routes) : []
     const [collapsed, setCollapsed] = useState(false)
     const [openKeys, setOpenKeys] = useState(activeKeys)
     const openMenu = (v: any) => {
