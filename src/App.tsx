@@ -1,13 +1,20 @@
 import React from 'react'
 import Layout from './layout/index'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Redirect, Route } from 'react-router-dom'
 
-function App(): JSX.Element {
+const Login = (): JSX.Element => {
+    return <div>login</div>
+}
+
+const App = (): JSX.Element => {
     return (
         <Router>
-            <div className='App'>
-                <Layout></Layout>
-            </div>
+            <Switch>
+                <Route path='/login' component={Login}></Route>
+                <Route path='/app' component={Layout}></Route>
+                <Route path='/404'>出错啦</Route>
+                <Redirect to='/404' push></Redirect>
+            </Switch>
         </Router>
     )
 }

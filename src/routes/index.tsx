@@ -7,6 +7,8 @@ const Role = (): JSX.Element => <div>Role</div>
 const Test = (): JSX.Element => <div>Test</div>
 
 export interface IRoute {
+    /* UUID */
+    id: string
     /** 路径 */
     path: string
     /** 重定向 */
@@ -21,17 +23,19 @@ export interface IRoute {
     children?: IRoute[]
 }
 
+// 路由配置项
 const routes: IRoute[] = [
-    { path: '/platform', title: '中央控制台', icon: 'rocket', component: Platform, redirect: '/platform/index' },
-    { path: '/test', title: '测试', icon: 'rocket', component: Test, redirect: '/platform/index' },
+    { id: 'a7d20965-884d-40ae-bd78-08827741023e', path: '/platform', title: '中央控制台', icon: 'rocket', component: Platform },
+    { id: '60c122da-0590-43f9-8067-cc11139226d6', path: '/test', title: '测试', icon: 'rocket', component: Test },
     {
+        id: '495e5831-9e8d-4d5a-8bda-4d2be4991ea6',
         path: '/settings',
         title: '系统设置',
         icon: 'rocket',
         component: Settings,
         children: [
-            { path: 'user', title: '用户管理', component: User },
-            { path: 'role', title: '角色管理', component: Role }
+            { id: 'e4f7cdea-530b-426c-b85d-1d87b40e6562', path: 'user', title: '用户管理', component: User },
+            { id: '88e63792-3d31-4bb7-a0a5-a1dc82403c04', path: 'role', title: '角色管理', component: Role }
         ]
     }
 ]
