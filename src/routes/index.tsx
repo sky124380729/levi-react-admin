@@ -1,9 +1,8 @@
-import React from 'react'
+import React, { FC } from 'react'
 import Platform from '../views/platform'
-import Settings from '../views/Settings'
+import User from '../views/settings/user'
+import Role from '../views/settings/role'
 
-const User = (): JSX.Element => <div>User</div>
-const Role = (): JSX.Element => <div>Role</div>
 const Test = (): JSX.Element => <div>Test</div>
 
 export interface IRoute {
@@ -18,7 +17,7 @@ export interface IRoute {
     /** 图标 */
     icon?: string
     /** 组件 */
-    component: () => JSX.Element
+    component?: FC | (() => JSX.Element)
     /** 子路由 */
     children?: IRoute[]
 }
@@ -32,7 +31,6 @@ const routes: IRoute[] = [
         path: '/settings',
         title: '系统设置',
         icon: 'rocket',
-        component: Settings,
         children: [
             { id: 'e4f7cdea-530b-426c-b85d-1d87b40e6562', path: 'user', title: '用户管理', component: User },
             { id: '88e63792-3d31-4bb7-a0a5-a1dc82403c04', path: 'role', title: '角色管理', component: Role }
