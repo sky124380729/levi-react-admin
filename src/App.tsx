@@ -10,6 +10,7 @@ const App = (): JSX.Element => {
     return (
         <Router>
             <Switch>
+                <Redirect path='/' exact to='/app'></Redirect>
                 <Route path='/login' component={Login}></Route>
                 <Route path='/app' component={Layout}></Route>
                 <Route path='/404'>出错啦</Route>

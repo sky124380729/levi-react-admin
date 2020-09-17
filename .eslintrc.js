@@ -3,6 +3,7 @@ module.exports = {
     extends: ['plugin:@typescript-eslint/recommended', 'react-app', 'plugin:prettier/recommended'],
     plugins: ['@typescript-eslint', 'react'],
     rules: {
-        'no-non-null-assertion':0
+        'no-non-null-assertion': 'off',
+        'no-explicit-any': 'off'
     }
 }

@@ -3,9 +3,8 @@ import { MenuUnfoldOutlined, MenuFoldOutlined, MenuOutlined } from '@ant-design/
 import { Layout as Wrapper, Menu, Breadcrumb } from 'antd'
 import { Link, Route, Switch, Redirect, RouteProps } from 'react-router-dom'
 import { Location } from 'history'
-import logo from './logo.png'
-import './style.scss'
 import routes, { IRoute } from '../routes'
+import './style.scss'
 
 const Welcome = (): JSX.Element => {
     return <div>Welcome</div>
@@ -18,7 +17,7 @@ const generateMenus = (routes: IRoute[], fullPath = '') => {
         if (children && children.length) {
             return (
                 <Menu.SubMenu title={title} icon={icon && <MenuOutlined />} key={id}>
-                    {generateMenus(children, fullPath + '/' + route.path)}
+                    {generateMenus(children, fullPath + '/' + path)}
                 </Menu.SubMenu>
             )
         } else {
@@ -92,10 +91,6 @@ const getRouteId = (location: Location, routes: IRoute[]): string[] => {
     return ids
 }
 
-// const openMenu = (openKeys: string[]) => {
-//     console.log(openKeys)
-// }
-
 const { Header, Sider, Content } = Wrapper
 
 const Layout: FC = (props: RouteProps) => {
@@ -109,7 +104,7 @@ const Layout: FC = (props: RouteProps) => {
         <Wrapper className='levi-layout'>
             <Sider className='levi-aside' trigger={null} collapsible collapsed={collapsed}>
                 <div className='levi-aside__logo'>
-                    <img src={logo} alt='' />
+                    <img src={require('./logo.png')} alt='' />
                 </div>
                 <Menu className='levi-aside__menu' theme='dark' mode='inline' onOpenChange={openMenu} selectedKeys={activeKeys} openKeys={openKeys}>
                     {generateMenus(routes)}
