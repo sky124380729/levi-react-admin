@@ -1,9 +1,8 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import Platform from '../views/platform'
+import Test from '../views/test'
 import User from '../views/settings/user'
 import Role from '../views/settings/role'
-
-const Test = (): JSX.Element => <div>Test</div>
 
 export interface IRoute {
     /* UUID */
@@ -17,7 +16,8 @@ export interface IRoute {
     /** 图标 */
     icon?: string
     /** 组件 */
-    component?: FC | (() => JSX.Element)
+    // component?: FC | (() => JSX.Element)
+    component?: any
     /** 子路由 */
     children?: IRoute[]
 }

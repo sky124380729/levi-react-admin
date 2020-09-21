@@ -1,9 +1,21 @@
 import React from 'react'
 import Layout from './layout/index'
+import Cookies from 'js-cookie'
 import { BrowserRouter as Router, Switch, Redirect, Route } from 'react-router-dom'
 
-const Login = (): JSX.Element => {
-    return <div>login</div>
+const Login = (props: any): JSX.Element => {
+    const handleClick = (e: React.MouseEvent) => {
+        // console.log(e)
+        Cookies.set('token', 'whosyourdaddy')
+        props.history.push('/')
+    }
+    console.log(props)
+    return (
+        <div>
+            <p>login</p>
+            <button onClick={handleClick}>登录</button>
+        </div>
+    )
 }
 
 const App = (): JSX.Element => {

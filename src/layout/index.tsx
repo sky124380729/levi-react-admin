@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react'
+import Cookies from 'js-cookie'
 import { MenuUnfoldOutlined, MenuFoldOutlined, MenuOutlined } from '@ant-design/icons'
-import { Layout as Wrapper, Menu, Breadcrumb } from 'antd'
+import { Layout as Wrapper, Menu, Breadcrumb, Affix } from 'antd'
 import { Link, Route, Switch, Redirect, RouteProps } from 'react-router-dom'
 import { Location } from 'history'
 import routes, { IRoute } from '../routes'
@@ -98,37 +99,48 @@ const Layout: FC = (props: RouteProps) => {
     const activeKeys = props.location ? getRouteKeys(props.location, routes) : []
     const [collapsed, setCollapsed] = useState(false)
     const [openKeys, setOpenKeys] = useState(activeKeys)
+    // 是否已登录，未登录跳转到登录页
+    const isLoggedIn = Cookies.get('token')
     const openMenu = (v: any) => {
         setOpenKeys(v)
     }
+    console.log(isLoggedIn)
     return (
-        <Wrapper className='levi-layout'>
-            <Sider className='levi-aside' trigger={null} collapsible collapsed={collapsed}>
-                <div className='levi-aside__logo'>
-                    <img src={require('./logo.png')} alt='' />
-                </div>
-                <Menu className='levi-aside__menu' theme='dark' mode='inline' onOpenChange={openMenu} selectedKeys={activeKeys} openKeys={openKeys}>
-                    {generateMenus(routes)}
-                </Menu>
-            </Sider>
-            <Wrapper className='levi-section'>
-                <Header className='levi-section__header' style={{ padding: 0 }}>
-                    {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-                        className: 'trigger',
-                        onClick: () => {
-                            setCollapsed(!collapsed)
-                        }
-                    })}
-                    <Breadcrumb>
-                        <Breadcrumb.Item>
-                            <Link to={'/app/platform'}>首页</Link>
-                        </Breadcrumb.Item>
-                        {props.location && generateBreadcrumb(props.location, routes)}
-                    </Breadcrumb>
-                </Header>
-                <Content className='levi-section__content'>{generateRoutes(routes)}</Content>
+        <>
+            {!isLoggedIn && <Redirect to='/login'></Redirect>}
+            <Wrapper className='levi-layout'>
+                <Sider className='levi-aside' trigger={null} collapsible collapsed={collapsed}>
+                    <Affix>
+                        <div className='levi-aside__logo'>
+                            <img src={require('./logo.png')} alt='' />
+                        </div>
+                    </Affix>
+                    <Menu className='levi-aside__menu' theme='dark' mode='inline' onOpenChange={openMenu} selectedKeys={activeKeys} openKeys={openKeys}>
+                        {generateMenus(routes)}
+                    </Menu>
+                </Sider>
+
+                <Wrapper className='levi-section'>
+                    <Affix>
+                        <Header className='levi-section__header' style={{ padding: 0 }}>
+                            {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
+                                className: 'trigger',
+                                onClick: () => {
+                                    setCollapsed(!collapsed)
+                                }
+                            })}
+                            <Breadcrumb>
+                                <Breadcrumb.Item>
+                                    <Link to={'/app/platform'}>首页</Link>
+                                </Breadcrumb.Item>
+                                {props.location && generateBreadcrumb(props.location, routes)}
+                            </Breadcrumb>
+                        </Header>
+                    </Affix>
+                    <Content className='levi-section__content'>{generateRoutes(routes)}</Content>
+                </Wrapper>
             </Wrapper>
-        </Wrapper>
+        </>
     )
 }
 

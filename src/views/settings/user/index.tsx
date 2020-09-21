@@ -40,10 +40,10 @@ const residences = [
 const formItemLayout = {
     labelCol: {
         xs: {
-            span: 24
+            span: 12
         },
         sm: {
-            span: 8
+            span: 4
         }
     },
     wrapperCol: {
@@ -68,7 +68,7 @@ const tailFormItemLayout = {
     }
 }
 
-const RegistrationForm = () => {
+const RegistrationForm = (): JSX.Element => {
     const [form] = Form.useForm()
 
     const onFinish = (values: any) => {

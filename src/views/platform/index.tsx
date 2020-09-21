@@ -52,9 +52,9 @@ const Platform: FC = (props) => {
     }
     const submitForm = () => {
         const { validateFields } = form
-        setConfirmLoading(true)
         validateFields()
             .then((values) => {
+                setConfirmLoading(true)
                 setTimeout(() => {
                     message.success('成功')
                     setVisible(false)
