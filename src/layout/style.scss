@@ -25,7 +25,14 @@
     }
     .levi-section {
         &__header {
+            justify-content: space-between;
             background: #fff;
+            padding: 0;
+            box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+            padding: 0 16px;
+            .header__left {
+                display: flex;
+            }
         }   
         &__content {
             background: #fff;
@@ -38,7 +45,7 @@
             display: flex;
             align-items: center;
             .trigger {
-                margin: 0 16px;
+                margin-right: 16px;
                 font-size: 20px;
             }
         }

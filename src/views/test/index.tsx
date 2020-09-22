@@ -1,7 +1,7 @@
 import React from 'react'
-import { withRouter, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-const Test = () => (
+const Test = (): JSX.Element => (
     <div>
         <p>测试路由跳转</p>
         <li>

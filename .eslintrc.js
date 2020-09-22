@@ -4,6 +4,7 @@ module.exports = {
     plugins: ['@typescript-eslint', 'react'],
     rules: {
         'no-non-null-assertion': 'off',
-        'no-explicit-any': 'off'
+        'no-explicit-any': 'off',
+        'jsx-a11y/anchor-is-valid': 'off'
     }
 }

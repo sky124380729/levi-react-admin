@@ -1,4 +1,3 @@
-import { FC } from 'react'
 import Platform from '../views/platform'
 import Test from '../views/test'
 import User from '../views/settings/user'

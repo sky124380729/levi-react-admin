@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import Cookies from 'js-cookie'
 import { MenuUnfoldOutlined, MenuFoldOutlined, MenuOutlined } from '@ant-design/icons'
 import { Layout as Wrapper, Menu, Breadcrumb, Affix } from 'antd'
@@ -109,17 +109,19 @@ const Layout: FC = (props: RouteProps) => {
     const openMenu = (v: any) => {
         setOpenKeys(v)
     }
-    console.log(isLoggedIn)
+    // 路由变化的时候回到顶部
+    const pathname = props.location && props.location.pathname
+    useEffect(() => {
+        window.scrollTo({})
+    }, [pathname])
     return (
         <>
             {!isLoggedIn && <Redirect to='/login'></Redirect>}
             <Wrapper className='levi-layout'>
                 <Sider className='levi-aside' trigger={null} collapsible collapsed={collapsed}>
-                    <Affix>
-                        <div className='levi-aside__logo'>
-                            <img src={require('./logo.png')} alt='' />
-                        </div>
-                    </Affix>
+                    <div className='levi-aside__logo'>
+                        <img src={require('./logo.png')} alt='' />
+                    </div>
                     <Menu className='levi-aside__menu' theme='dark' mode='inline' onOpenChange={openMenu} selectedKeys={activeKeys} openKeys={openKeys}>
                         {generateMenus(routes)}
                     </Menu>
@@ -127,19 +129,22 @@ const Layout: FC = (props: RouteProps) => {
 
                 <Wrapper className='levi-section'>
                     <Affix>
-                        <Header className='levi-section__header' style={{ padding: 0 }}>
-                            {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-                                className: 'trigger',
-                                onClick: () => {
-                                    setCollapsed(!collapsed)
-                                }
-                            })}
-                            <Breadcrumb>
-                                <Breadcrumb.Item>
-                                    <Link to={'/app/platform'}>首页</Link>
-                                </Breadcrumb.Item>
-                                {props.location && generateBreadcrumb(props.location, routes)}
-                            </Breadcrumb>
+                        <Header className='levi-section__header'>
+                            <div className='header__left'>
+                                {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
+                                    className: 'trigger',
+                                    onClick: () => {
+                                        setCollapsed(!collapsed)
+                                    }
+                                })}
+                                <Breadcrumb>
+                                    <Breadcrumb.Item>
+                                        <Link to={'/app/platform'}>首页</Link>
+                                    </Breadcrumb.Item>
+                                    {props.location && generateBreadcrumb(props.location, routes)}
+                                </Breadcrumb>
+                            </div>
+                            <div className='header__right'>1</div>
                         </Header>
                     </Affix>
                     <Content className='levi-section__content'>{generateRoutes(routes, props)}</Content>
