@@ -65,8 +65,8 @@ const Platform: FC = (props) => {
     }
     return (
         <>
-            <PageHeader title='角色管理' subTitle='角色信息配置在这里'></PageHeader>
-            <Table rowKey='id' bordered style={{ margin: '0 20px' }} columns={columns} dataSource={data}></Table>
+            <PageHeader title='角色管理' onBack={() => null} subTitle='角色信息配置在这里'></PageHeader>
+            <Table rowKey='id' bordered columns={columns} dataSource={data}></Table>
             <Modal
                 title='角色管理'
                 visible={visible}
