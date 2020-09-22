@@ -178,6 +178,19 @@ input { /* 1 */
   overflow: visible;
 }
 
+/* 99999s 基本上就是一个无限长的时间 
+    通过延长增加自动填充背景色的方式, 是用户感受不到样式的变化
+ */
+input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+        transition-delay: 99999s;
+        -webkit-transition-delay: 99999s;
+        transition: color 99999s ease-out, background-color 99999s ease-out;
+        -webkit-transition: color 99999s ease-out, background-color 99999s ease-out;
+    }
+
 /**
  * Remove the inheritance of text transform in Edge, Firefox, and IE.
  * 1. Remove the inheritance of text transform in Firefox.
