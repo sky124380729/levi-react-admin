@@ -3,6 +3,7 @@ import Cookies from 'js-cookie'
 import { MenuUnfoldOutlined, MenuFoldOutlined, MenuOutlined } from '@ant-design/icons'
 import { Layout as Wrapper, Menu, Breadcrumb, Affix } from 'antd'
 import { Link, Route, Switch, Redirect, RouteProps } from 'react-router-dom'
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { Location } from 'history'
 import routes, { IRoute } from '../routes'
 import './style.scss'
@@ -35,7 +36,7 @@ const generateMenus = (routes: IRoute[], fullPath = '') => {
     })
 }
 
-const generateRoutes = (routes: IRoute[]) => {
+const generateRoutes = (routes: IRoute[], props: RouteProps) => {
     const createRoute = (routes: IRoute[], fullPath = ''): any => {
         return routes.map((route: IRoute) => {
             const { id, path, children, component } = route
@@ -48,14 +49,18 @@ const generateRoutes = (routes: IRoute[]) => {
         })
     }
     return (
-        <Switch>
-            {/* 欢迎页 */}
-            <Route path='/app' exact component={Welcome}></Route>
-            {/* 动态路由表 */}
-            {createRoute(routes)}
-            {/* 未匹配到选项重定向 */}
-            <Route render={() => <Redirect to='/404' push />} />
-        </Switch>
+        <TransitionGroup>
+            <CSSTransition key={props.location?.pathname} classNames='fade-in-linear' timeout={300}>
+                <Switch>
+                    {/* 欢迎页 */}
+                    <Route path='/app' exact component={Welcome}></Route>
+                    {/* 动态路由表 */}
+                    {createRoute(routes)}
+                    {/* 未匹配到选项重定向 */}
+                    <Route render={() => <Redirect to='/404' push />} />
+                </Switch>
+            </CSSTransition>
+        </TransitionGroup>
     )
 }
 
@@ -137,7 +142,7 @@ const Layout: FC = (props: RouteProps) => {
                             </Breadcrumb>
                         </Header>
                     </Affix>
-                    <Content className='levi-section__content'>{generateRoutes(routes)}</Content>
+                    <Content className='levi-section__content'>{generateRoutes(routes, props)}</Content>
                 </Wrapper>
             </Wrapper>
         </>
