@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react'
 import Cookies from 'js-cookie'
-import { MenuUnfoldOutlined, MenuFoldOutlined, MenuOutlined } from '@ant-design/icons'
-import { Layout as Wrapper, Menu, Breadcrumb, Affix } from 'antd'
+import { MenuUnfoldOutlined, MenuFoldOutlined, MenuOutlined, DownOutlined } from '@ant-design/icons'
+import { Layout as Wrapper, Menu, Breadcrumb, Affix, Avatar, Dropdown } from 'antd'
 import { Link, Route, Switch, Redirect, RouteProps } from 'react-router-dom'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { Location } from 'history'
@@ -100,7 +100,7 @@ const getRouteKeys = (location: Location, routes: IRoute[]): string[] => {
 
 const { Header, Sider, Content } = Wrapper
 
-const Layout: FC = (props: RouteProps) => {
+const Layout: FC = (props: any) => {
     const activeKeys = props.location ? getRouteKeys(props.location, routes) : []
     const [collapsed, setCollapsed] = useState(false)
     const [openKeys, setOpenKeys] = useState(activeKeys)
@@ -114,6 +114,33 @@ const Layout: FC = (props: RouteProps) => {
     useEffect(() => {
         window.scrollTo({})
     }, [pathname])
+    const changePwd = () => {
+        console.log('呵呵')
+    }
+    const logout = () => {
+        // console.log('')
+        Cookies.remove('token')
+        props.history.push('/login')
+    }
+    const menu = (
+        <Menu>
+            <Menu.Item
+                onClick={() => {
+                    changePwd()
+                }}
+            >
+                修改密码
+            </Menu.Item>
+            <Menu.Divider />
+            <Menu.Item
+                onClick={() => {
+                    logout()
+                }}
+            >
+                退出登录
+            </Menu.Item>
+        </Menu>
+    )
     return (
         <>
             {!isLoggedIn && <Redirect to='/login'></Redirect>}
@@ -144,7 +171,20 @@ const Layout: FC = (props: RouteProps) => {
                                     {props.location && generateBreadcrumb(props.location, routes)}
                                 </Breadcrumb>
                             </div>
-                            <div className='header__right'>1</div>
+                            <div className='header__right'>
+                                <Avatar src='https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png' />
+                                <span className='userName'>Levi</span>
+                                <Dropdown overlay={menu} trigger={['click']}>
+                                    <a
+                                        className='ant-dropdown-link'
+                                        onClick={(e) => {
+                                            console.log(e)
+                                        }}
+                                    >
+                                        个人中心 <DownOutlined />
+                                    </a>
+                                </Dropdown>
+                            </div>
                         </Header>
                     </Affix>
                     <Content className='levi-section__content'>{generateRoutes(routes, props)}</Content>

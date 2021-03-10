@@ -33,6 +33,13 @@
             .header__left {
                 display: flex;
             }
+            .header__right {
+                display: flex;
+                align-items: center;
+                .userName {
+                    margin: 0 12px;
+                }
+            }
         }   
         &__content {
             background: #fff;
